@@ -1,6 +1,7 @@
 '''
 - node: The index of the node you want the parent of.
 - size: The index of the root node
+Ref: https://stackoverflow.com/a/20565347/4752488
 '''
 def getParent(node, size):
     rank = size

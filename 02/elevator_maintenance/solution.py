@@ -1,3 +1,6 @@
+'''
+Ref: https://stackoverflow.com/a/2574090/4752488
+'''
 def answer(l):
     l.sort(key=lambda s: list(map(int, s.split('.'))))
     return l
