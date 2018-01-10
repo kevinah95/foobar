@@ -39,7 +39,12 @@ Test cases
 Inputs:
     (int list) entrances = [0]
     (int list) exits = [3]
-    (int) path = [[0, 7, 0, 0], [0, 0, 6, 0], [0, 0, 0, 8], [9, 0, 0, 0]]
+    (int) path = [
+        [0, 7, 0, 0], 
+        [0, 0, 6, 0], 
+        [0, 0, 0, 8], 
+        [9, 0, 0, 0]
+    ]
 Output:
     (int) 6
 
