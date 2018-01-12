@@ -78,9 +78,9 @@ class Graph:
 				self.graph[u][v] -= path_flow
 				self.graph[v][u] += path_flow
 				v = parent[v]
-			import numpy as np
-			print(np.matrix(graph))
-			print parent
+			#import numpy as np
+			#print(np.matrix(graph))
+			#print parent
 
 		return max_flow
 
@@ -89,9 +89,10 @@ def answer(entrances, exits, path):
     # Create a graph given in the above diagram
     g = Graph(path)
     result = 0
-    #for i in range (len(entrances)):
-    source = entrances[1]; sink = exits[1]
-    result += g.FordFulkerson(source, sink)
+    for i in range (len(entrances)):
+		for j in range(len(exits)):
+			source = entrances[i]; sink = exits[j]
+			result += g.FordFulkerson(source, sink)
     return result
 
 
