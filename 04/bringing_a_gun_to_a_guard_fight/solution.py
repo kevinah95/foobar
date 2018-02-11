@@ -50,13 +50,27 @@ def get_targets(start_point, distance, DIMENSIONS, SOURCE):
             if(t[1] == SOURCE[1]):
                 if(t != start_point):
                     temp_all.discard(t)
+                    if( validate_slope(SOURCE,start_point,t) ):
+                        temp_all.discard(t)
     if(has_same_x):
         for t in all_targets:
             if(t[0] == SOURCE[0]):
                 if(t != start_point):
                     temp_all.discard(t)
+                    if( validate_slope(SOURCE,start_point,t) ):
+                        temp_all.discard(t)
+    ''' for t in all_targets:
+        if(t != start_point):
+            if( validate_slope(SOURCE,start_point,t) ):
+                temp_all.discard(t) '''
+    temp_all_2 = set()
+    temp_all_2 |= temp_all
+    for t in temp_all:
+        temp_all_2.discard(t) 
+        t = round_two_decimals(t)
+        temp_all_2.add(t)
                 
-    return temp_all
+    return temp_all_2
 
 
 def answer(dimensions, your_position, guard_position, distance):
@@ -73,14 +87,24 @@ def validate_same_y(your_position, guard_position):
 def validate_same_x(your_position, guard_position):
     return your_position[0] == guard_position[0]
 
-dimensions = [300, 275]
+def validate_slope(your_position, guard_position, other_point):
+    m1 = ((other_point[1]-guard_position[1])/(other_point[0]-guard_position[0]))
+    b1 = other_point[1] - m1* other_point[0]
+    m2 = ((other_point[1]-your_position[1])/(other_point[0]-your_position[0]))
+    b2 = other_point[1] - m2 * other_point[0]
+    return (m1==m2) and (b1==b2)
+
+def round_two_decimals(t):
+    return (round(t[0]),round(t[1]))
+
+''' dimensions = [300, 275]
 your_position = [150, 150]
 guard_position = [185, 100]
-distance = 500
+distance = 500 '''
 
-''' dimensions = [3, 2]
+dimensions = [3, 2]
 your_position = [1, 1]
-guard_position = [2, 1]
-distance = 4 '''
+guard_position = [1.99, 1.66]
+distance = 4
 
 print (answer(dimensions, your_position, guard_position, distance))
