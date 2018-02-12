@@ -102,9 +102,14 @@ your_position = [150, 150]
 guard_position = [185, 100]
 distance = 500 '''
 
-dimensions = [3, 2]
+''' dimensions = [3, 2]
 your_position = [1, 1]
-guard_position = [1.99, 1.66]
-distance = 4
+guard_position = [2, 1]
+distance = 4 '''
+
+dimensions = [23,10]
+your_position = [6, 4]
+guard_position = [3,2]
+distance = 23
 
 print (answer(dimensions, your_position, guard_position, distance))
