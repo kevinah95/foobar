@@ -1,6 +1,35 @@
 import math
 
 
+def find_slope_and_y_intercept(a,b):
+    m = calculate_slope(a,b)
+    slope = calculate_y_intercept(b,m)
+    cuadrant = calculate_quadrant(b)
+    return (m,slope,cuadrant)
+
+def calculate_y_intercept(a,slope):
+    # y_intercept = y - m*x
+    return a[1] - slope * a[0]
+
+def calculate_slope(a,b):
+    if(b[0]==a[0]): return 0
+    # slope = ((y2-y1)/(x2-x1))
+    return ((b[1]-a[1])/(b[0]-a[0]))
+
+def calculate_quadrant(t):
+    x = t[0]
+    y = t[1]
+    if (x > 0 and y > 0):
+        return 1
+
+    elif (x < 0 and y > 0):
+        return 2
+        
+    elif (x < 0 and y < 0):
+        return 3
+    
+    elif (x > 0 and y < 0):
+        return 4
 
 def get_mirrored(point,DIMENSIONS, source_point, target_point):
     ret = []
@@ -33,7 +62,7 @@ def get_targets(start_point, distance, DIMENSIONS, SOURCE):
             # only keep the ones within range
             new_targets = set(
                 t for t in new_targets
-                if math.hypot(SOURCE[0]-t[0], SOURCE[1]-t[1]) <= distance)
+                if math.hypot(SOURCE[0]-t[0], SOURCE[1]-t[1]) <= distance and not (t[0]==t[1]==0)) 
                 # if math.hypot((SOURCE[0]-t[0])-SOURCE[0], (SOURCE[1]-t[1])-SOURCE[1] ) <= DISTANCE)
             # subtract the ones we already have
             new_targets -= all_targets
@@ -64,11 +93,17 @@ def get_targets(start_point, distance, DIMENSIONS, SOURCE):
             if( validate_slope(SOURCE,start_point,t) ):
                 temp_all.discard(t) '''
     temp_all_2 = set()
-    temp_all_2 |= temp_all
+    #temp_all_2 |= temp_all
+    all_equations = set()
     for t in temp_all:
-        temp_all_2.discard(t) 
-        t = round_two_decimals(t)
-        temp_all_2.add(t)
+        new_equ = find_slope_and_y_intercept(SOURCE,t)
+        #print (new_equ)
+        #print(t)
+        if(t == start_point):
+            temp_all_2.add(t)
+        elif(new_equ not in all_equations):
+            temp_all_2.add(t)
+            all_equations.add(new_equ)
                 
     return (temp_all_2)
 
@@ -116,4 +151,13 @@ your_position = [1, 2]
 guard_position = [1,4]
 distance = 11
 
-print (answer(dimensions, your_position, guard_position, distance))
+answer_result = answer(dimensions, your_position, guard_position, distance)
+print (answer_result)
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+zip(*answer_result)
+plt.scatter(*zip(*answer_result))
+plt.show()

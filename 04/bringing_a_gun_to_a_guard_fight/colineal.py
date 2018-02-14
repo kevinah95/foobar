@@ -14,6 +14,21 @@ def calculate_slope(a,b):
     # slope = ((y2-y1)/(x2-x1))
     return ((b[1]-a[1])/(b[0]-a[0]))
 
+def calculate_quadrant(t):
+    x = t[0]
+    y = t[1]
+    if (x > 0 and y > 0):
+        return 1
+
+    elif (x < 0 and y > 0):
+        return 2
+        
+    elif (x < 0 and y < 0):
+        return 3
+    
+    elif (x > 0 and y < 0):
+        return 4
+
 me = (1,2)
 other = (-5,2)
 
